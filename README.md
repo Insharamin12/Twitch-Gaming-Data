@@ -1,56 +1,65 @@
-# 📊 Twitch Data Analysis Project
+# 🎮 Twitch Data Analysis with SQL
 
-Twitch is the world’s leading live streaming platform for gamers, with over **240 million monthly active users**.  
-This project explores **viewer behavior** and **chat activity** using two datasets provided by the Twitch Science Team:
+This project explores **Twitch stream viewing data** and **chat activity** using SQL.  
+The dataset (≈800k rows), provided by the **Twitch Science Team**  is poublicly available and contains two main tables:
 
-- **`stream` table** → Stream viewing data  
-- **`chat` table** → Chat room usage data  
+- **`stream`** → Information about streams (viewing data)  
+- **`chat`** → Information about chat messages (engagement data)  
 
-The goal is to practice SQL skills by analyzing these datasets, uncovering insights about games, channels, users, and engagement patterns.
-
----
-
-## 🚀 Project Overview
-
-The project is structured into a series of SQL tasks:
-
-1. **Getting Started**
-   - Preview the `stream` and `chat` tables
-   - Explore column names and data formats
-   - Identify unique games and channels  
-
-2. **Aggregate Functions**
-   - Find the most popular games  
-   - Analyze **League of Legends** viewers by country  
-   - Count players (devices/platforms used to view streams)  
-   - Categorize games into **genres** (MOBA, FPS, Survival, Other)  
-
-3. **Time-Based Analysis**
-   - Inspect the `time` column (DATETIME format)  
-   - Use `strftime()` to extract parts of timestamps  
-   - Explore how viewership changes by **hour of the day**  
-
-4. **Joining Tables**
-   - Join `stream` and `chat` on `device_id`  
-   - Combine viewing and chat activity for deeper insights  
-
-5. **Extended Exploration**
-   - Top games with the most chat activity  
-   - Channels with the most engaged viewers  
-   - Compare viewers vs. chat activity for favorite games  
-   - Peak chat activity by hour of day  
-   - Most “chatty” countries (messages per viewer ratio)  
+The goal is to uncover insights about games, viewers, and chat behavior.
 
 ---
 
-## 🗂️ Dataset
+## 📂 Dataset Schema
 
-The practice dataset contains around **800,000 rows** and is publicly available on GitHub:
+### `stream` table
+- `time` – Timestamp of stream activity (`YYYY-MM-DD HH:MM:SS`)  
+- `device_id` – Unique device identifier (join key with `chat`)  
+- `login` – Viewer username  
+- `channel` – Channel being streamed  
+- `country` – Viewer country  
+- `player` – Platform/device used (site, iPhone, Android, etc.)  
+- `game` – Game being streamed  
+- `stream_format` – Video quality (e.g., 1080p, 720p)  
+- `subscriber` – Subscriber flag  
 
-- `stream.csv` → Stream viewing data  
-- `chat.csv` → Chat room usage data  
+### `chat` table
+- `time` – Timestamp of chat message  
+- `device_id` – Unique device identifier (join key with `stream`)  
+- `login` – Viewer username  
+- `channel` – Channel where the chat occurred  
+- `country` – Country of the chatter  
+- `player` – Platform/device used  
+- `game` – Game related to the chat  
 
-> ⚠️ Note: This dataset is provided by the Twitch Science Team for educational purposes.
+---
+
+## 🚀 Queries & Analysis
+
+### 1. Getting Started
+- Previewed first rows of both `stream` and `chat` tables  
+- Retrieved all unique games and channels  
+
+### 2. Aggregate Functions
+- Counted the number of streams per game to find **most popular games**  
+- Analyzed **League of Legends** viewers by country  
+- Counted viewers by platform (`player`)  
+- Categorized games into genres (`MOBA`, `FPS`, `Survival`, `Other`) using `CASE`  
+
+### 3. Time-Based Analysis
+- Previewed the `time` column to understand `DATETIME` format  
+- Used `strftime()` to extract seconds and hours  
+- Counted viewership by **hour of the day** (for US viewers)  
+
+### 4. Joining Tables
+- Joined `stream` and `chat` on `device_id` to combine viewing & chat activity  
+
+### 5. Favorite Games Analysis (League of Legends & Dota 2)
+- **Viewership stats** → unique viewers & total streams  
+- **Chat stats** → unique chatters & total messages  
+- **Engagement ratio** → messages per viewer  
+- **Country breakdown** → which countries are most engaged  
+- **Subscriber analysis** → compared chat activity of subscribers vs. non-subscribers  
 
 ---
 
@@ -60,4 +69,12 @@ The practice dataset contains around **800,000 rows** and is publicly available 
 - **GitHub** → Dataset hosting and version control  
 
 ---
+
+## 📈 Key Insights
+
+- **League of Legends** and **Dota 2** dominate viewership and engagement.  
+- **MOBA games** generate significantly higher traffic compared to FPS and Survival games.  
+- Viewer activity peaks at certain **hours of the day**, especially in the US.  
+- Some countries produce more **messages per viewer**, indicating higher engagement levels.  
+- **Subscribers** tend to be more active in chat than non-subscribers.  
 
