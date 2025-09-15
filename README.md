@@ -1,7 +1,7 @@
 # 🎮 Twitch Data Analysis with SQL
 
 This project explores **Twitch stream viewing data** and **chat activity** using SQL.  
-The dataset (≈800k rows), provided by the **Twitch Science Team**  is poublicly available and contains two main tables:
+The dataset (≈800k rows), provided by the **Twitch Science Team**  is publicly available and contains two main tables:
 
 - **`stream`** → Information about streams (viewing data)  
 - **`chat`** → Information about chat messages (engagement data)  
